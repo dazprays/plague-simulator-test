@@ -6,3 +6,4 @@ streamlit
 python-dotenv
 google-cloud-aiplatform
 langchain
+google-generativeai
