@@ -1,7 +1,7 @@
 import os
+from dotenv import load_dotenv
 import streamlit as st
 import vertexai
-import google.generativeai as genai
 from vertexai.preview.generative_models import GenerativeModel
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
@@ -9,6 +9,7 @@ from typing import Any, List, Mapping, Optional
 from langchain.callbacks.manager import CallbackManagerForLLMRun
 from langchain_core.language_models.llms import LLM
 from vertexai.preview.generative_models import GenerativeModel
+import google.generativeai as genai
 
 
 class GeminiProLLM(LLM):
@@ -45,10 +46,11 @@ class GeminiProLLM(LLM):
         """Get the identifying parameters."""
         return {"model_id": "gemini-pro", "temperature": 0.1}
 
-# Using `GOOGLE_API_KEY` environment variable.
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
-genai.configure(api_key=GOOGLE_API_KEY)
 
+# Initialize Vertex AI
+load_dotenv()
+API_KEY = os.environ.get("GOOGLE_API_KEY")
+genai.configure(api_key=API_KEY)
 
 # Setting page title and header
 st.set_page_config(page_title="Gemini Pro Chatbot", page_icon=":robot_face:")
